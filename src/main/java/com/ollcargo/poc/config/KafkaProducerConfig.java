@@ -25,15 +25,15 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, Order> orderProducerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
+        Map<String, Object> configProps = new HashMap();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
-        return new DefaultKafkaProducerFactory<>(configProps);
+        return new DefaultKafkaProducerFactory(configProps);
     }
 
     @Bean
     public KafkaTemplate<String, Order> userKafkaTemplate() {
-        return new KafkaTemplate<>(orderProducerFactory());
+        return new KafkaTemplate(orderProducerFactory());
     }
 }
