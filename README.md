@@ -9,7 +9,7 @@ Cette PoC est aussi disponible avec Docker, voici un guide pour l'utiliser :
     mvn package -DskipTests
 
     docker-compose up -d --build
-    (si vous avez déjà utiliser une fois auparavant, vous pouvez utiliser : docker-compose up)
+    (si vous avez déjà utilisé l'application auparavant, vous pouvez utiliser : docker-compose up)
 
 Toute l'application (l'API, Postgresql, kafka et zookeeper) devrait être lancé dans des containers.
 
@@ -27,10 +27,10 @@ Toute l'application (l'API, Postgresql, kafka et zookeeper) devrait être lancé
             "clientAmount":41
         }
 
-    envoyer un GET sur localhost:8080/order, vous devriez obtenir une liste de tout les orders que vous avez ajouter à la bdd
+    envoyer un GET sur localhost:8080/order, vous devriez obtenir une liste de tout les orders que vous avez ajouté à la bdd
 
     envoyer un GET sur localhost:8080/order/{id} ou {id} est l'id d'un des orders que vous avez envoyé plus tot
-    
+
     envoyer un POST sur localhost:8080/order/{id}/kafka ou {id} est l'id d'un des orders que vous avez envoyé plus tot, vérifier ensuite dans votre consumer kafka, l'order devrait apparaitre dans la console.
 
 6. La commande :
