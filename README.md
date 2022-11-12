@@ -18,16 +18,20 @@ Toute l'application (l'API, Postgresql, kafka et zookeeper) devrait être lancé
     docker run --network app-tier bitnami/kafka kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic order
 
 5. Avec Postman (ou un autre outil permettant de faire des requêtes comme curl ...):
-    -envoyer un GET sur localhost:8080/ vous devriez obtenir un message indiquant que ça fonctionne en réponse
-    -envoyer quelques requêtes POST sur localhost:8080/order avec un body similaire à:
+    envoyer un GET sur localhost:8080/ vous devriez obtenir un message indiquant que ça fonctionne en réponse
+
+    envoyer quelques requêtes POST sur localhost:8080/order avec un body similaire à:
         {
             "id":2,
             "deliveryAmount":55,
             "clientAmount":41
         }
-    -envoyer un GET sur localhost:8080/order, vous devriez obtenir une liste de tout les orders que vous avez ajouter à la bdd
-    -envoyer un GET sur localhost:8080/order/{id} ou {id} est l'id d'un des orders que vous avez envoyé plus tot
-    -envoyer un POST sur localhost:8080/order/{id}/kafka ou {id} est l'id d'un des orders que vous avez envoyé plus tot, vérifier ensuite dans votre consumer kafka, l'order devrait apparaitre dans la console.
+
+    envoyer un GET sur localhost:8080/order, vous devriez obtenir une liste de tout les orders que vous avez ajouter à la bdd
+
+    envoyer un GET sur localhost:8080/order/{id} ou {id} est l'id d'un des orders que vous avez envoyé plus tot
+    
+    envoyer un POST sur localhost:8080/order/{id}/kafka ou {id} est l'id d'un des orders que vous avez envoyé plus tot, vérifier ensuite dans votre consumer kafka, l'order devrait apparaitre dans la console.
 
 6. La commande :
     docker-compose stop
