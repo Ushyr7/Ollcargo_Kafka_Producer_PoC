@@ -1,15 +1,19 @@
-version: '2'
+version: '3'
 networks:
   app-tier:
-    driver: bridge
+    name: app-tier
 
 services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     networks:
       - app-tier
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes #disable authentification
   kafka:
     image: 'bitnami/kafka:latest'
+    depends_on:
+      - zookeeper
     networks:
       - app-tier
     environment:
@@ -23,14 +27,16 @@ services:
       - '9092:9092'
       - '9093:9093'
   db:
-    image: postgres
-    container: postgres_poc_ollcargo
+    image: postgres:15.1 # https://hub.docker.com/_/postgres
+    container_name: postgres_poc_ollcargo
     environment:
-      POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=mysecretpassword
     networks:
       - app-tier  
   spring-api:
-    image: poc
+    build: . #Automatically run with the Dockerfile in the current directory
+    depends_on:
+      - db #db must start before API
     networks:
       - app-tier
     ports:
